@@ -10,10 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.movietask.R;
-import com.example.movietask.movie.model.Model;
-import com.example.movietask.utils.interfaces.OnClickListener;
+import com.example.movietask.movie.model.MovieModel;
+import com.example.movietask.listener.OnClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,16 +20,17 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private OnClickListener onClickListener;
-    private List<Model> models;
+    private List<MovieModel> movieModels;
     private Context context;
+
 
     public RecyclerViewAdapter(Context context, OnClickListener onClickListener) {
         this.context = context;
         this.onClickListener = onClickListener;
     }
 
-    public void setModels(List<Model> movies) {
-        this.models = movies;
+    public void setMovieModels(List<MovieModel> movies) {
+        this.movieModels = movies;
     }
 
     @NonNull
@@ -42,18 +42,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, final int position) {
-
-        holder.title.setText(("  Title : " + models.get(position).getTitle()));
-        holder.rating.setText(("  Rating : " + models.get(position).getRating()));
-        holder.releaseYear.setText(("  Release Year : " + models.get(position).getReleaseYear()));
-
-        Picasso.get().load(models.get(position).getImage()).into(holder.imageView);
+        holder.bind(movieModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (this.models != null) {
-            return this.models.size();
+        if (this.movieModels != null) {
+            return this.movieModels.size();
         }
         return 0;
     }
@@ -66,17 +61,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            findViews(itemView);
+            onClick();
+        }
+        private void findViews(View itemView){
             imageView = itemView.findViewById(R.id.image_main);
             title = itemView.findViewById(R.id.title_main);
             rating = itemView.findViewById(R.id.rating_main);
             releaseYear = itemView.findViewById(R.id.release_Year_main);
-
+        }
+        private void onClick(){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onClickListener.onClickItem(getAdapterPosition());
                 }
             });
+        }
+        private void bind(MovieModel movieModels){
+            title.setText(("  Title : " + movieModels.getTitle()));
+            rating.setText(("  Rating : " + movieModels.getRating()));
+            releaseYear.setText(("  Release Year : " + movieModels.getReleaseYear()));
+            Picasso.get().load(movieModels.getImage()).into(imageView);
         }
     }
 }

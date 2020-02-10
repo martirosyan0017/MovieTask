@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.movietask.R;
-import com.example.movietask.movie.model.Model;
+import com.example.movietask.movie.model.MovieModel;
 
-public class UserActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView titleText;
@@ -39,7 +39,7 @@ public class UserActivity extends AppCompatActivity {
     public void getData() {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("movie")) {
-            Model movie = intent.getParcelableExtra("movie");
+            MovieModel movie = intent.getParcelableExtra("movie");
             if (movie != null) {
                 titleText.setText(("  Title : " + movie.getTitle()));
                 ratingText.setText(("  Rating : " + movie.getRating()));

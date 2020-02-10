@@ -1,4 +1,4 @@
-package com.example.movietask.utils.interfaces;
+package com.example.movietask.listener;
 
 public interface OnClickListener {
     void onClickItem(int position);

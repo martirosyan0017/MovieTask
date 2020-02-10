@@ -1,4 +1,4 @@
-package com.example.movietask.utils.interfaces;
+package com.example.movietask.constants;
 
 public interface AppConstants {
     String BASE_URL = "https://api.androidhive.info/";

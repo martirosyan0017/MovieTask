@@ -9,16 +9,16 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model implements Parcelable {
-    public static final Creator<Model> CREATOR = new Creator<Model>() {
+public class MovieModel implements Parcelable {
+    public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
         @Override
-        public Model createFromParcel(Parcel in) {
-            return new Model(in);
+        public MovieModel createFromParcel(Parcel in) {
+            return new MovieModel(in);
         }
 
         @Override
-        public Model[] newArray(int size) {
-            return new Model[size];
+        public MovieModel[] newArray(int size) {
+            return new MovieModel[size];
         }
     };
     @SerializedName("title")
@@ -37,7 +37,7 @@ public class Model implements Parcelable {
     @Expose
     private List<String> genre = new ArrayList<>();
 
-    protected Model(Parcel in) {
+    protected MovieModel(Parcel in) {
         String[] arr = new String[2];
         in.readStringArray(arr);
         in.readStringList(genre);
